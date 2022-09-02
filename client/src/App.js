@@ -41,7 +41,7 @@ function App() {
   useEffect(()=>{
     if(updateCurrentUser === true){
       const user = localStorage.getItem('user');
-      axios.get(`http://localhost:5000/api/home/user/${user}`)
+      axios.get(`/api/home/user/${user}`)
       .then(res => {
         if(res.data.user){
           setCurrentUser(res.data.user);
@@ -62,7 +62,7 @@ function App() {
     const token=localStorage.getItem('token');
     if(token){
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      axios.get(`http://localhost:5000/api/test`)
+      axios.get(`/api/test`)
       .then(res => {
         setLogged(true);
       })
@@ -70,7 +70,7 @@ function App() {
       const token2= getCookie('token');
       if(token2 !== ""){
         axios.defaults.headers.common['Authorization'] = `Bearer ${token2}`;
-        axios.get(`http://localhost:5000/api/test`)
+        axios.get(`/api/test`)
           .then(res => {
             localStorage.setItem('token', token2);
             setLogged(true);
@@ -85,7 +85,7 @@ function App() {
   useEffect(()=>{
     if(logged === true){
       const user = localStorage.getItem('user');
-      axios.get(`http://localhost:5000/api/home/user/${user}`)
+      axios.get(`/api/home/user/${user}`)
       .then(res => {
         if(res.data.user){
           setSavedPost(res.data.saved_post);
@@ -96,7 +96,7 @@ function App() {
           const user2 = getCookie('user');
           if(user2 !== ""){
             localStorage.setItem('user', user2);
-            axios.get(`http://localhost:5000/api/home/user/${user2}`)
+            axios.get(`/api/home/user/${user2}`)
             .then(res => {
               if(res.data.user){
                 setCurrentUser(res.data.user);
@@ -117,7 +117,7 @@ function App() {
 
   useEffect(()=>{
     if(currentUser){
-      axios.get(`http://localhost:5000/api/possiblefriend/${currentUser._id}`)
+      axios.get(`/api/possiblefriend/${currentUser._id}`)
         .then(res =>{
           if(res.data.user){
             setPossibleFriends(res.data.user);
