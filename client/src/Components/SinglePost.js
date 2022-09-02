@@ -166,7 +166,7 @@ function SinglePost({singlePost,currentUser,setUploading, setUpdateCurrentUser})
     }
 
     function copyUrl(){
-        navigator.clipboard.writeText(`http://localhost:3000/#/post/${singlePost._id}`);
+        navigator.clipboard.writeText(`https://odinbookclone.herokuapp.com/#/post/${singlePost._id}`);
         setMessage('Post link copied in the clipboard!')
         snackbarRef.current.show();
     }
