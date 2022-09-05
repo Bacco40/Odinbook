@@ -120,14 +120,16 @@ exports.post_delete = function(req, res) {
         post: function(callback) {
             Post.findById(req.params.id)
               .exec(callback)
-        },
+        }
     }, function(err, results) {
         if (err) { return res.json(err); }
         // Success
         else {
             Post.findByIdAndRemove(req.params.id, function deletePost(err) {
                 if (err) { return res.json(err); }
-                return res.json(true)
+                Notification.deleteMany({'notification.post_ref' : req.params.id}, function(err) {
+                    return res.json(true)
+                })
             })
         }
     });

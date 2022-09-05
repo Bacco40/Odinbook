@@ -65,8 +65,9 @@ function CreatePost({profile,uploading, setUploading}){
                 axios.post(`/api/post/create`, {image_url,postContent,user})
                     .then(res => {
                         if(!res.data.errors){
+                            document.querySelector('.postText').value='';
                             closePostForm(e);
-                            setUploading(false)
+                            setUploading(false);
                         }else{
                             console.log(res.data.errors)
                         }
@@ -76,6 +77,7 @@ function CreatePost({profile,uploading, setUploading}){
                 axios.post(`/api/post/create`, {postContent,user})
                     .then(res => {
                         if(!res.data.errors){
+                            document.querySelector('.postText').value='';
                             closePostForm(e);
                             setUploading(false);
                         }else{

@@ -45,10 +45,12 @@ function SinglePost({singlePost,currentUser,setUploading, setUpdateCurrentUser})
         document.querySelector(`.postMenu[name="${singlePost._id}"]`).style.cssText="display:none !important;";
         setOpen(false)
         setUploading(true);
+        setUpdateCurrentUser(false)
         axios.delete(`/api/post/${singlePost._id}/delete`)
             .then(res => {
                 if(!res.data.errors){
                     setUploading(false)
+                    setUpdateCurrentUser(true)
                 }else{
                     console.log(res.data.errors)
                 }
