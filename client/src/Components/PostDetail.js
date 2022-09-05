@@ -31,13 +31,16 @@ function PostDetail({logged,currentUser, setUpdateCurrentUser}){
     function addComment(e,idPost){
         e.preventDefault();
         setUploading(true);
+        setUpdateCurrentUser(false)
         const comment = document.querySelector(`.commentAdd[name="${idPost}"]`).value;
         const user = localStorage.getItem('user');
-        axios.post(`/api/comment/${idPost}/create`, {comment,user})
+        const creator = post.creator._id;
+        axios.post(`/api/comment/${idPost}/create`, {comment,user,creator})
             .then(res => {
                 if(!res.data.errors){
                     document.querySelector(`.commentAdd[name="${idPost}"]`).value ='';
-                    setUploading(false)
+                    setUploading(false);
+                    setUpdateCurrentUser(true);
                 }else{
                     console.log(res.data.errors)
                 }
@@ -341,7 +344,7 @@ function PostDetail({logged,currentUser, setUpdateCurrentUser}){
                         </div>
                         <div className='bigPostComment'>
                             {post.comments.map((comment,index)=>(
-                                <SingleComment key={index} comment={comment} currentUser={currentUser} setUploading={setUploading}/> 
+                                <SingleComment key={index} comment={comment} currentUser={currentUser} setUploading={setUploading} setUpdateCurrentUser={setUpdateCurrentUser} singlePost={post}/> 
                             ))}
                         </div>
                         <div className='addComment' id='bigPostComment'>
@@ -459,7 +462,7 @@ function PostDetail({logged,currentUser, setUpdateCurrentUser}){
                         </div>
                         <div className='bigPostComment'>
                             {post.comments.map((comment,index)=>(
-                                <SingleComment key={index} comment={comment} currentUser={currentUser} setUploading={setUploading}/> 
+                                <SingleComment key={index} comment={comment} currentUser={currentUser} setUploading={setUploading} setUpdateCurrentUser={setUpdateCurrentUser} singlePost={post}/> 
                             ))}
                         </div>
                         <div className='addComment'>

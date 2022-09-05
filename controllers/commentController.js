@@ -84,6 +84,7 @@ exports.comment_delete= function(req, res) {
         if (err) { return res.json(err); }
         // Success
         else {
+            console.log(results)
             Comment.findByIdAndRemove(req.params.id, function deleteComment(err,comment) {
                 if (err) { return res.json(err); }
                 //Successful
