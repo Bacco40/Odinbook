@@ -131,7 +131,7 @@ function SinglePost({singlePost,currentUser,setUploading, setUpdateCurrentUser})
                 if(!res.data.errors){
                     setUpdateCurrentUser(true)
                     openPostMenu(e)
-                    setMessage('Post saved successfully!')
+                    setMessage('Post removed from saved!')
                     snackbarRef.current.show();
                 }else{
                     console.log(res.data.errors)
