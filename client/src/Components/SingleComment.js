@@ -111,7 +111,8 @@ function SingleComment({comment,currentUser, setUploading, setUpdateCurrentUser,
         const user = comment.creator;
         const ref = comment.post_ref;
         const date = comment.date_of_creation;
-        axios.put(`/api/comment/${comment._id}/update`, {commentEdited,user,ref,date})
+        const likes = comment.likes;
+        axios.put(`/api/comment/${comment._id}/update`, {commentEdited,user,ref,date,likes})
             .then(res => {
                 if(!res.data.errors){
                     setEdit(false)

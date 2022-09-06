@@ -127,7 +127,8 @@ exports.comment_edit =[
                     comment: req.body.commentEdited,
                     creator: req.body.user,
                     post_ref: req.body.ref,
-                    date_of_creation: req.body.date
+                    date_of_creation: req.body.date,
+                    likes: req.body.likes
                 });
             Comment.findByIdAndUpdate(req.params.id, comment, {}, function (err) {
                 if (err) { return res.json(err); }
