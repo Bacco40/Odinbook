@@ -292,7 +292,6 @@ exports.user_get_possible_friend_to_add = function (req, res) {
     userFriend: function(callback) {
         User.find({ "friends.user_id": { "$ne": [`${req.params.id}`] } })
         .select('username name surname profile_pic')
-        .limit(4)
         .exec(callback)
     },
   }, function(err, results) {

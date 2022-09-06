@@ -194,7 +194,11 @@ function Home({setMessageRead, selectedChat, setSelectedChat,logged, loading, pr
                                 <div className='profilePart' id='friendSuggContainer'>
                                     <div className='friendSuggestion'>People You May Know:</div>
                                     {possibleFriends.map((singleUser, index)=>(
-                                        <AddFriend key={index} option={option} singleUser= {singleUser} currentUser={currentUser} setUpdateCurrentUser={setUpdateCurrentUser}/>
+                                        <React.Fragment key={index}>
+                                            {index < 3 &&
+                                                <AddFriend option={option} singleUser= {singleUser} currentUser={currentUser} setUpdateCurrentUser={setUpdateCurrentUser}/>
+                                            }
+                                        </React.Fragment>
                                     ))}
                                 </div> 
                             }
@@ -203,22 +207,18 @@ function Home({setMessageRead, selectedChat, setSelectedChat,logged, loading, pr
                                     <div className='friendSuggestion'>Message Friends:</div>
                                     <hr/>
                                     {currentUser.friends.map((singleUser, index)=>(
-                                        <React.Fragment key={index}>
-                                            {index < 5 && 
-                                                <MessageFriend 
-                                                    key={index} 
-                                                    singleUser= {singleUser} 
-                                                    messagedUser1={messagedUser1}
-                                                    setMessagedUser1={setMessagedUser1}
-                                                    messagedUser2={messagedUser2}
-                                                    setMessagedUser2={setMessagedUser2}
-                                                    currentUser={currentUser}
-                                                    openMessages1={openMessages1}
-                                                    openMessages2={openMessages2}
-                                                    setSelectedChat={setSelectedChat}
-                                                />
-                                            }
-                                        </React.Fragment>
+                                        <MessageFriend 
+                                            key={index} 
+                                            singleUser= {singleUser} 
+                                            messagedUser1={messagedUser1}
+                                            setMessagedUser1={setMessagedUser1}
+                                            messagedUser2={messagedUser2}
+                                            setMessagedUser2={setMessagedUser2}
+                                            currentUser={currentUser}
+                                            openMessages1={openMessages1}
+                                            openMessages2={openMessages2}
+                                            setSelectedChat={setSelectedChat}
+                                        />
                                     ))}
                                 </div> 
                             }

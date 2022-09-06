@@ -963,6 +963,8 @@ header{
   display: flex;
   flex-direction: column;
   margin-bottom: 0;
+  height: 40%;
+  overflow-y: scroll;
 }
 .profilePartTop{
   display: flex;
