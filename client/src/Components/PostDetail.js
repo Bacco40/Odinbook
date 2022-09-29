@@ -288,7 +288,9 @@ function PostDetail({logged,currentUser, setUpdateCurrentUser}){
                                 </div>
                             </div>
                         </div>
-                        <div className='postCaption'>{post.post}</div>
+                        {post.post &&
+                            <div className='postCaption'>{post.post}</div>
+                        }
                         {post.likes.length > 0 &&
                             <div className='likeNumberContainer'>
                                 <div className='standard'>

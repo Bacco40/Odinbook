@@ -69,6 +69,7 @@ function CreatePost({profile,uploading, setUploading}){
                         closePostForm(e);
                         setUploading(false);
                     }else{
+                        setUploading(false)
                         document.querySelector('.errorReg').innerHTML=res.data.errors.post.message;
                         document.querySelector('.errorReg').style.cssText='color:red';
                     }

@@ -248,7 +248,9 @@ function SinglePost({singlePost,currentUser,setUploading, setUpdateCurrentUser})
                 </div>
             </div>
             <div className='actualPost'>
-                <div className='postCaption'>{singlePost.post}</div>
+                {singlePost.post &&
+                    <div className='postCaption'>{singlePost.post}</div>
+                }
                 {singlePost.image_url.map((singleImage, index)=>(
                     <Link key={index} to={`/post/${singlePost._id}`}>
                         <div className='sameHeigthContainer'>

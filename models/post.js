@@ -6,7 +6,7 @@ var PostSchema = new Schema(
   {
     creator: {type: Schema.Types.ObjectId, ref: 'User', required: true},
     image_url: [{ type: String}],
-    post: {type: String, required: true},
+    post: {type: String},
     comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}],
     date_of_creation: {type: Date, required: true, default: Date.now},
     likes: [{type: Schema.Types.ObjectId, ref: 'User'}],
