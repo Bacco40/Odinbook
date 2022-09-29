@@ -70,8 +70,9 @@ function CreatePost({profile,uploading, setUploading}){
                             closePostForm(e);
                             setUploading(false);
                         }else{
-                            document.querySelector('.postText').value=res.data.errors;
-                            document.querySelector('.postText').style.cssText='color:red';
+                            console.log(res.data.errors)
+                            document.querySelector('.errorReg').innerHTML=res.data.errors[0];
+                            document.querySelector('.errorReg').style.cssText='color:red';
                         }
                     }) 
                 }
@@ -88,8 +89,8 @@ function CreatePost({profile,uploading, setUploading}){
                             setUploading(false);
                         }else{
                             setUploading(false)
-                            document.querySelector('.postText').value=res.data.errors;
-                            document.querySelector('.postText').style.cssText='color:red';
+                            document.querySelector('.errorReg').innerHTML=res.data.errors[0];
+                            document.querySelector('.errorReg').style.cssText='color:red';
                         }
                     }) 
             }

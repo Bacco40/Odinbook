@@ -87,7 +87,7 @@ exports.post_create_post = [
             // Data from form is valid.
             let post=null;
             if(req.body.image_url){
-                if(req.body.postContent){
+                if(req.body.postContent !== ""){
                     post = new Post(
                     {
                         image_url: req.body.image_url,
