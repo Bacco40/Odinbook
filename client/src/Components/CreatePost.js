@@ -18,6 +18,7 @@ function CreatePost({profile,uploading, setUploading}){
         setImage(null);
         setImageUrl(null);
         document.body.style.overflow = ``;
+        document.querySelector('.errorReg').innerHTML='';
     }
 
     function openPostForm(e){
