@@ -73,9 +73,6 @@ exports.post_detail = function(req, res) {
 // Handle Post create on POST.
 exports.post_create_post = [
 
-    // Validate and sanitize fields.
-    body('postContent').trim().isLength({ min: 1, max:2000}).withMessage('Post must be specified, and must be maximum 2000 character long.'),
-
     // Process request after validation and sanitization.
     (req, res, next) => {
 
@@ -90,12 +87,21 @@ exports.post_create_post = [
             // Data from form is valid.
             let post=null;
             if(req.body.image_url){
-               post = new Post(
-                {
-                    image_url: req.body.image_url,
-                    post: req.body.postContent,
-                    creator: req.body.user
-                }); 
+                if(req.body.postContent){
+                    post = new Post(
+                    {
+                        image_url: req.body.image_url,
+                        post: req.body.postContent,
+                        creator: req.body.user
+                    }); 
+                }
+                else{
+                    post = new Post(
+                    {
+                        post: req.body.postContent,
+                        creator: req.body.user
+                    }); 
+                }
             }
             else{
                 post = new Post(

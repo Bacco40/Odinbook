@@ -62,16 +62,22 @@ function CreatePost({profile,uploading, setUploading}){
                 const newImageRef = ref(getStorage(), filePath);
                 const fileSnapshot = await uploadBytesResumable(newImageRef, image);
                 image_url = await getDownloadURL(newImageRef);
-                axios.post(`/api/post/create`, {image_url,postContent,user})
+                if(postContent === ''){
+                    axios.post(`/api/post/create`, {image_url,postContent,user})
                     .then(res => {
                         if(!res.data.errors){
                             document.querySelector('.postText').value='';
                             closePostForm(e);
                             setUploading(false);
                         }else{
-                            console.log(res.data.errors)
+                            document.querySelector('.postText').value=res.data.errors;
+                            document.querySelector('.postText').style.cssText='color:red';
                         }
                     }) 
+                }
+                else{
+                    
+                }
             }
             else{
                 axios.post(`/api/post/create`, {postContent,user})
@@ -81,7 +87,9 @@ function CreatePost({profile,uploading, setUploading}){
                             closePostForm(e);
                             setUploading(false);
                         }else{
-                            console.log(res.data.errors)
+                            setUploading(false)
+                            document.querySelector('.postText').value=res.data.errors;
+                            document.querySelector('.postText').style.cssText='color:red';
                         }
                     }) 
             }
