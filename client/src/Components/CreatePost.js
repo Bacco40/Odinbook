@@ -62,26 +62,21 @@ function CreatePost({profile,uploading, setUploading}){
                 const newImageRef = ref(getStorage(), filePath);
                 const fileSnapshot = await uploadBytesResumable(newImageRef, image);
                 image_url = await getDownloadURL(newImageRef);
-                if(postContent === ''){
-                    axios.post(`/api/post/create`, {image_url,postContent,user})
-                    .then(res => {
-                        if(!res.data.errors){
-                            document.querySelector('.postText').value='';
-                            closePostForm(e);
-                            setUploading(false);
-                        }else{
-                            console.log(res.data.errors)
-                            document.querySelector('.errorReg').innerHTML=res.data.errors[0];
-                            document.querySelector('.errorReg').style.cssText='color:red';
-                        }
-                    }) 
-                }
-                else{
-                    
-                }
+                axios.post(`/api/post/create`, {image_url,postContent,user})
+                .then(res => {
+                    if(!res.data.errors){
+                        document.querySelector('.postText').value='';
+                        closePostForm(e);
+                        setUploading(false);
+                    }else{
+                        document.querySelector('.errorReg').innerHTML=res.data.errors.post.message;
+                        document.querySelector('.errorReg').style.cssText='color:red';
+                    }
+                })
             }
             else{
-                axios.post(`/api/post/create`, {postContent,user})
+                if(postContent !== ''){
+                    axios.post(`/api/post/create`, {postContent,user})
                     .then(res => {
                         if(!res.data.errors){
                             document.querySelector('.postText').value='';
@@ -89,10 +84,16 @@ function CreatePost({profile,uploading, setUploading}){
                             setUploading(false);
                         }else{
                             setUploading(false)
-                            document.querySelector('.errorReg').innerHTML=res.data.errors[0];
+                            document.querySelector('.errorReg').innerHTML=res.data.errors.post.message;
                             document.querySelector('.errorReg').style.cssText='color:red';
                         }
                     }) 
+                }
+                else{
+                    setUploading(false)
+                    document.querySelector('.errorReg').innerHTML='Please add text to your post';
+                    document.querySelector('.errorReg').style.cssText='color:red';
+                }
             }
         }
         catch(error) {

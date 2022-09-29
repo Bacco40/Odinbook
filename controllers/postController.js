@@ -98,7 +98,8 @@ exports.post_create_post = [
                 else{
                     post = new Post(
                     {
-                        post: req.body.postContent,
+                        image_url: req.body.image_url,
+                        post:'',
                         creator: req.body.user
                     }); 
                 }
